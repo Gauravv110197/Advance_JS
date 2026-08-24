@@ -15,8 +15,12 @@ function fetchUserData() {
 
 
 async function getUser() {
-    const user = await fetchUserData();
-    console.log(user);
+    try {
+        const user = await fetchUserData();
+        console.log(user);
+    } catch (error) {
+        console.error(error.message);
+    }
 }
 
-getUser()
+getUser();
