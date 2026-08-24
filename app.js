@@ -117,15 +117,13 @@ Promise.race([flightServer1, flightServer2])
   });
 
 Promise.allSettled([flightPromise, hotelPromise, cabPromise, insurancePromise])
-  .then((results) => {
-    results.forEach((result) => {
-      if (result.status === "fulfilled") {
-        console.log("Success:", result.value);
-      } else {
-        console.log("Failed:", result.reason.message);
-      }
-    });
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
   });
+
 Promise.any([backupServerA, backupServerB, backupServerC])
   .then((response) => {
     console.log(response);

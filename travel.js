@@ -33,7 +33,7 @@ const cabPromise = new Promise((resolve, reject) => {
       data: "Cab booked"
     });
   } else {
-    reject(new Error("Cab service failed"));
+    reject(new Error("Cab booking failed"));
   }
 });
 
@@ -102,34 +102,36 @@ const backupServerC = new Promise((resolve, reject) => {
 
 Promise.all([flightPromise, hotelPromise, cabPromise, insurancePromise])
   .then((response) => {
-    console.log(response);
+    console.log("Package ready:", response);
   })
   .catch((error) => {
-    console.log(error.message);
+    console.log("Package failed:", error.message);
   });
 
 Promise.race([flightServer1, flightServer2])
   .then((response) => {
-    console.log(response);
+    console.log("Fastest flight:", response.data);
   })
   .catch((error) => {
-    console.log(error.message);
+    console.log("Fastest flight failed:", error.message);
   });
 
 Promise.allSettled([flightPromise, hotelPromise, cabPromise, insurancePromise])
   .then((results) => {
+    console.log("All service results:");
     results.forEach((result) => {
       if (result.status === "fulfilled") {
-        console.log("Success:", result.value);
+        console.log("-", result.value.service, ":", result.value.data);
       } else {
-        console.log("Failed:", result.reason.message);
+        console.log("-", "Failed:", result.reason.message);
       }
     });
   });
+
 Promise.any([backupServerA, backupServerB, backupServerC])
   .then((response) => {
-    console.log(response);
+    console.log("First successful flight:", response.data);
   })
   .catch((error) => {
-    console.log(error.message);
+    console.log("All flight servers failed:", error.message);
   });
