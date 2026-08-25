@@ -4,6 +4,6 @@ const emitter = new EventEmitter()
 
 //Event register using .on() method
 
-emitter.on("login", (data) => {
-
-
+emitter.on("login", () => {
+    console.log("User logged in");
+});
