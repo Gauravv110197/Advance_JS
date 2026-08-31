@@ -7,4 +7,13 @@ fs.mkdir("./myFolder", (err) => {
 
     }
     console.log("Folder created successfully");
-});
+fs.readdir("./myFolder", (err, files) => {  
+    if(err){
+        console.log(err);
+        return;
+    }
+    console.log("Directory Content", files);
+
+})
+
+})
