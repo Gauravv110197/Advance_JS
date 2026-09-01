@@ -7,13 +7,12 @@ fs.mkdir("./myFolder", (err) => {
 
     }
     console.log("Folder created successfully");
-fs.readdir("./myFolder", (err, files) => {  
+fs.readdir("./myFolder1//myFolder2//myFolder3",{recursive:true}, (err, files) => {  
     if(err){
         console.log(err);
         return;
     }
     console.log("Directory Content", files);
-
 })
 
-})
+});
