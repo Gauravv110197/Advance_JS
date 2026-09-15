@@ -8,7 +8,7 @@ const server = http.createServer((req, res) => {
     if (req.url === "/") {
 
         const data = fs.readFileSync("home.html", "utf8")
-        res.end(data)
+        res.end()
 
     } else if (req.url === "/about") {
 
@@ -27,6 +27,6 @@ const server = http.createServer((req, res) => {
     }
 })
 
-server.listen(3002, "127.0.0.1", () => {
-    console.log("Server is running on port 3002")
+server.listen(3001, "127.0.0.1", () => {
+    console.log("Server is running on port 3001")
 })
