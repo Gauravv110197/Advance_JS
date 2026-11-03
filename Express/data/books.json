@@ -286,18 +286,6 @@
     ],
     "available": true,
     "price": 14.75
-  },
-  {
-    "id": "24",
-    "title": "The God of Small Things",
-    "author": "Arundhati Roy",
-    "published_year": 1997,
-    "genres": [
-      "Fiction",
-      "Drama",
-      "Classic"
-    ],
-    "available": true,
-    "price": 13.5
   }
+  
 ]

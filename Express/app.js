@@ -18,17 +18,27 @@ import fs from 'fs'
 // })
 
 const app=express()
-const bookData = fs.readFileSync("./data/books.json","utf-8")
+app.use(express.json())
+const bookData = JSON.parse(fs.readFileSync("./data/books.json",))
 app.get("/api/v1/books",(req,res)=>{
     try{
-         res.status(200).json({
-        status:"Success",
-        totalbooks:bookData.length,
-        data:{
-            book:bookData
-        }
-
+   let id=req.params.id
+   const book = bookData.find(book => book.id === id)
+   if(!book){
+    res.status(404).json({
+        status:"Fail",
+        message:'Book not found for this id :${id}'
     })
+}else{
+    res.status(200).json({
+        status:"Success",
+        data:{
+            book : book
+        }
+    })
+}
+
+
  
 }catch(error){
     res.status(404).json({
@@ -38,9 +48,23 @@ app.get("/api/v1/books",(req,res)=>{
 }
 })
 
+// app.get("/api/v1/books/:id",(req,res)=>{
+//    let id=req.params.id
+//    const book = bookData.find(book => book.id === id)
+//    res.send(book)
+// })
+app.get("/api/v1/books",(req,res)=>{
+    console.log("Post req")
+    console.log(req.body)
 
-   
+    res.json(req.body)
+
+})
+
+app.delete("/api/v1/books/:id", (req, res) => {
+  const index = booksData.findIndex((book) => book.id === req.params.id);
+})
 
 app.listen(8000,()=>{
     console.log("Server is running ..........")
-})
+}) 
